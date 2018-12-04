@@ -1,0 +1,56 @@
+<h1>Registration Form</h1>
+<p>Main take aways from this section</p>
+
+<form class="form" novalidate [formGroup]="regForm">
+  <div class="form__field">
+    <label for="fullName" class="form__field__label">
+      {{ fullNameLabel }}
+    </label>
+    <input
+      type="text"
+      class="form__field__input"
+      name="fullName"
+      id="fullName"
+      autocomplete="name"
+      formControlName="fullName"
+    />
+  </div>
+
+  <div class="form__field">
+    <label for="email" class="form__field__label"> {{ emailLabel }} </label>
+    <input
+      type="email"
+      class="form__field__input"
+      name="email"
+      id="email"
+      autocomplete="email"
+      formControlName="email"
+    />
+  </div>
+
+  <div class="form__field">
+    <label for="password" class="form__field__label">
+      {{ passwordLabel }} (min {{ minPassLength }} characters)
+    </label>
+    <input
+      type="password"
+      class="form__field__input"
+      name="password"
+      id="password"
+      formControlName="password"
+      autocomplete="off"
+    />
+    <span class="form__field__hint">
+      {{ minPassLength - regForm.controls['password'].value?.length }}
+      {{ minPassLengthHint }}
+    </span>
+  </div>
+
+  <button
+    type="submit"
+    class="form__button--submit"
+    (click)="onSubmit(regForm)"
+  >
+    {{ submitButtonLabel }}
+  </button>
+</form>
