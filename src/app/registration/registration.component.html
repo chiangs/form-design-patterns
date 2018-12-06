@@ -1,10 +1,26 @@
 <h1>Registration Form</h1>
-<p>Main take aways from this section</p>
+<p>Key points</p>
+
+<ul>
+  <li>
+    Avoid novel and artificial space-saving patterns to focus on reducing the
+    number of fields we include.
+  </li>
+  <li>
+    Focus on simplifying and checking if the information can be prompted for
+    later.
+  </li>
+  <li>Avoid using the placeholder as a label</li>
+  <li>Consistent styling of buttons and links</li>
+  <li>Avoid validating fields as user types</li>
+  <li>Avoid disabling button</li>
+  <li>Focus on crafting useful and helptful error messages</li>
+</ul>
 
 <form class="form" novalidate [formGroup]="regForm">
   <div class="form__field">
     <label for="fullName" class="form__field__label">
-      {{ fullNameLabel }}
+      {{ fullNameLabel }} <span class="errorMark" *ngIf="fullNameError">*</span>
     </label>
     <input
       type="text"
@@ -17,7 +33,9 @@
   </div>
 
   <div class="form__field">
-    <label for="email" class="form__field__label"> {{ emailLabel }} </label>
+    <label for="email" class="form__field__label">
+      {{ emailLabel }} <span class="errorMark" *ngIf="emailError">*</span>
+    </label>
     <input
       type="email"
       class="form__field__input"
@@ -31,6 +49,7 @@
   <div class="form__field">
     <label for="password" class="form__field__label">
       {{ passwordLabel }} (min {{ minPassLength }} characters)
+      <span class="errorMark" *ngIf="passwordError">*</span>
     </label>
     <input
       type="password"
@@ -44,6 +63,14 @@
       {{ minPassLength - regForm.controls['password'].value?.length }}
       {{ minPassLengthHint }}
     </span>
+  </div>
+
+  <div class="errors">
+    <ul>
+      <li class="error" *ngIf="fullNameError">{{ fullNameErrorMsg }}</li>
+      <li class="error" *ngIf="emailError">{{ emailErrorMsg }}</li>
+      <li class="error" *ngIf="passwordError">{{ passwordErrorMsg }}</li>
+    </ul>
   </div>
 
   <button
